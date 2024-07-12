@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="success_wizard_form" model="ir.ui.view">
+        <field name="name">Lot.Serial.Success</field>
+        <field name="model">success.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Success">
+                <span>Imported Successfully.</span>
+                <footer>
+                <button string="OK" class="btn-secondary" type="object" name="action_return"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="success_wizard_action" model="ir.actions.act_window">
+        <field name="name">Lot Serial Success Wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">import.lot.serial.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="success_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+       <record id="monthly_invoice_recurring_action" model="ir.cron">
+           <field name="name">Recurring Monthly Invoice</field>
+           <field name="model_id" ref="model_hostel_management_student_information"/>
+           <field name="state">code</field>
+           <field name="code">model.monthly_rent_invoice()</field>
+           <field name="user_id" ref="base.user_root"/>
+           <field name="interval_number">1</field>
+           <field name="interval_type">months</field>
+           <field name="numbercall">-1</field>
+           <field name="nextcall">2024-06-01 01:30:00</field>
+       </record>
+</odoo>

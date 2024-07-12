@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="room_category_wise_template" name="Latest Rooms">
+        <!-- Template Latest Rooms -->
+        <section class="oe_structure container latest_room_snippet">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center py-5">
+                        <h1 class="h1">Latest Rooms</h1>
+                        <div id="latest_room_carousel">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="external_snippets" inherit_id="website.snippets" priority="8">
+        <xpath expr="//div[@id='snippet_effect']//t[@t-snippet][last()]" position="after">
+            <t t-snippet="hostel_management.room_category_wise_template"/>
+        </xpath>
+    </template>
+
+</odoo>

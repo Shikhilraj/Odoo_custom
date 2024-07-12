@@ -1,0 +1,49 @@
+.form_heading{
+    padding: 10px;
+    color: Grey;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.o_mark_required{
+    padding: 10px;
+    align: center;
+}
+.form-group{
+    padding: 10px;
+    align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.student_register_submit{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+
+.room_snippet_carousel_inner{
+    width : 85%;
+}
+.next_arrow{
+    color: black;
+}
+.prev_arrow{
+    color: black;
+
+}
+.room_snippet_carousel_next{
+    right : -5%;
+}
+.room_snippet_carousel_prev{
+    left: -5%;
+}
+.single_room_snippet_room_details{
+    display: grid;
+    justify-content: center;
+    width : 30rem
+}
+.room_details_container{
+    top: auto;
+    right: 0;
+}

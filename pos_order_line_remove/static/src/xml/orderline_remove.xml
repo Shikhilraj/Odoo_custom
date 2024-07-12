@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+  <t t-name="pos_order_line_remove.orderline_Remove"
+     t-inherit="point_of_sale.Orderline" t-inherit-mode="extension" owl="1">
+     <xpath expr="//div[hasclass('product-price')]" position="after">
+            <div class="line-remove" t-on-click="removeLine" style="color:red; margin-left: 25px;">
+                <span>
+                    <i class="fa fa-close"
+                       aria-label="Remove orderline"
+                       title="Remove orderline"/>
+                </span>
+            </div>
+
+     </xpath>
+
+   </t>
+</templates>

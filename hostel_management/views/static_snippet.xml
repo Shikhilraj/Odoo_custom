@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="single_room_snippet" name="Room Snippet">
+        <t t-call="website.layout">
+            <section class=" static_snippet_single_room oe_structure oe_empty">
+                <div class="container room_details_container">
+                    <t t-foreach="room" t-as="data">
+                        <div class="single_room_snippet_room_details m-auto">
+                            <div class="card" style="width: 30rem;">
+                                <img class="card-img-top" t-attf-src="data:image/png;base64,{{data.image}}"/>
+                                <div class="card-body">
+                                    <h5 class="card-title"><span t-out="data.room_number"/></h5>
+                                        <div class="single_room_snippet_room_number">
+                                            Room Type : <span t-out="data.room_type"/>
+                                        </div>
+                                        <div class="single_room_snippet_room_number">
+                                            Rent : $ <span t-out="data.total_rent"/>
+                                        </div>
+                                        <div class="single_room_snippet_room_number">
+                                            Number of Beds : <span t-out="data.number_of_beds"/>
+                                        </div>
+                                        <div class="single_room_snippet_room_number">
+                                            Room Number : <span t-out="data.room_number"/>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="back_to_dynamic_snippet_link">
+                                <a href="/" class="reverse_link">Back</a>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </section>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="menu_salesman_commission" name="Commission" parent="sale.sale_menu_root"
+              action="salesman_commission_action" sequence="40" groups="salesman_commission.salesman_commission_manager"/>
+
+</odoo>

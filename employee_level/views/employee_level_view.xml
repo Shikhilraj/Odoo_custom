@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="employee_level_tree_view" model="ir.ui.view">
+        <field name="name">Employee Level View</field>
+        <field name="model">employee.level</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Level View">
+                <field name="employee_level"/>
+                <field name="salary_level" widget="monetary"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="employee_level_action" model="ir.actions.act_window">
+        <field name="name">Employee Level</field>
+        <field name="res_model">employee.level</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+     <record id="customer_credit_limit" model="ir.ui.view">
+        <field name="name">Partner credit limit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref='account.view_partner_property_form'/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='banks']" position="inside">
+                <group string="Credit Limit" name="partner_credit_limit">
+                    <field name="credit_limit_active"/>
+                    <field name="credit_amount_warning" invisible="credit_limit_active == False"/>
+                    <field name="credit_amount_blocking" invisible="credit_limit_active == False"/>
+                    <field name="due_amount"/>
+                </group>
+            </xpath>
+
+</field>
+    </record>
+</odoo>

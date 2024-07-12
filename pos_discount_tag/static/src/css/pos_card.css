@@ -1,0 +1,23 @@
+.pos_discount_prize_tag_ribbon
+{
+
+    background-color:red;
+    height:19px;
+    font-weight: bold;
+    transform: rotate(45deg);
+    display: inline-block;
+}
+
+.discount_text_pos{
+]    display: inline-block;
+    width:  50% !important;
+    height:  50% !important;
+    left: 41%;
+    top: 4px;
+}
+
+#discount_price_tag_text_id{
+    position: relative;
+    top: -10px;
+    left: 63px;
+}

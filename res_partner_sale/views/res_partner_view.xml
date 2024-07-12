@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_partner_tree_view" model="ir.ui.view">
+        <field name="name">res_partner View</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree string="Res Partner View">
+                <field name="user_id"/>
+                <field name="order_ids"/>
+            </tree>
+        </field>
+    </record>
+
+
+     <record id="res_partner_view" model="ir.ui.view">
+        <field name="name">Res Partner View</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref='base.view_partner_form'/>
+        <field name="arch" type="xml">
+           <xpath expr="//div[@class='oe_button_box']" position="inside">
+                   <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="get_invoices"
+                        icon="fa-pencil-square-o">
+                        <field string="Sale Count" name="product_count" widget="statinfo"/>
+                    </button>
+                </div>
+            </xpath>
+
+            <xpath expr="//page[@name='contact_addresses']" position="after">
+                <page string="Sale Orders" name="sale_orders">
+                    <field name="user_id"/>
+                    <field name="order_ids"/>
+                </page>
+            </xpath>
+
+</field>
+    </record>
+</odoo>

@@ -1,0 +1,42 @@
+<templates id="template" xml:space="preserve">
+        <t t-name="hostel_management.room_snippet_carousel">
+            <div t-attf-id="room_carousel_{{index}}" class="carousel slide"
+                 data-bs-ride="carousel" t-att-data-bs-interval="interval">
+                <div class="room_snippet_carousel_inner carousel-inner row mx-auto" role="listbox">
+                    <t t-foreach="chunks" t-as="chunk" t-key="chunk_index">
+                        <div t-att-class="chunk.is_active ? 'carousel-item active' : 'carousel-item'">
+                            <div class="row">
+                                <t t-foreach="chunk" t-as="item" t-key="item_index">
+                                    <div class="block span3 col-3">
+                                        <div class="card-group">
+                                            <div class="card">
+                                                <img class="card-img-top" t-attf-src="data:image/png;base64,{{item.image}}"
+                                                     style="padding: 0px; margin: 0px; height: 160px; width:305px;"/>
+                                                <h5 class="mb-0"><t t-esc="item.room_number"/></h5>
+                                                <div class="mb-0"> Rent : $<t t-esc="item.total_rent"/> </div>
+                                                <a t-attf-href="/room/{{item.id}}" class="btn btn-primary">
+                                                Goto ROOM
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+            <a t-attf-href="#room_carousel_{{index}}" class="room_snippet_carousel_prev carousel-control-prev"
+               data-bs-slide="prev" role="button" aria-label="Previous"
+               title="Previous">
+                <span class="prev_arrow fa fa-chevron-circle-left fa-2x"/>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a t-attf-href="#room_carousel_{{index}}" class="room_snippet_carousel_next carousel-control-next"
+               data-bs-slide="next" role="button" aria-label="Next"
+               t-attf-id="room_snippet_carousel_next" title="Next">
+                <span class="next_arrow fa fa-chevron-circle-right fa-2x"/>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </t>
+</templates>

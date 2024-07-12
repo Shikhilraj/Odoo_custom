@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <template id="report_student">
+       <t t-call="web.html_container">
+               <t t-call="web.external_layout">
+                   <div class="page">
+                       <div class="oe_structure"/>
+                       <h2>Student Report</h2>
+                       <br/>
+
+                       <t t-if="data['room']">
+                           <p>
+                               <div>Room : <b><span t-out="data['room']"/></b>
+                               </div>
+                           </p>
+                       </t>
+                       <t t-if="data['student']">
+                           <p>
+                               <div>Student :
+                                   <b><span t-out="data['student']"/></b>
+                               </div>
+                           </p>
+                       </t>
+                       <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>SL No.</th>
+                                    <t t-if=" not data['student']">
+                                        <th>Name</th>
+                                    </t>
+                                    <th>Pending Amount</th>
+                                    <t t-if=" not data['room']">
+                                        <th>Room</th>
+                                    </t>
+                                    <th>Invoice Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="i" t-value="1" />
+                                <t t-foreach="result" t-as="dat">
+                                    <tr>
+                                        <td><span t-esc="i"/> </td>
+                                        <t t-if=" not data['student']">
+                                            <td>
+                                                <span t-out="dat['name']"/>
+                                            </td>
+                                        </t>
+                                        <td><span t-out="dat['pending_amount']"/></td>
+                                        <t t-if=" not data['room']">
+                                            <td>
+                                                <span t-out="dat['room_number']"/>
+                                            </td>
+                                        </t>
+                                        <td>
+                                            <span t-out="dict(docs._fields['payment_status'].selection).
+                                            get(dat['payment_status'])"/>
+                                        </td>
+                                        <t t-set="i" t-value="i+1"/>
+
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                       <br/>
+                       <br/>
+                   </div>
+               </t>
+       </t>
+   </template>
+</odoo>

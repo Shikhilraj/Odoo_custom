@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="employee_level_menu_root" name="EmployeeLevel">
+        <menuitem id="employee_level_menu"
+                  name="Employee Level">
+            <menuitem id="employee_level_menu_action"
+                      action="employee_level_action"/>
+        </menuitem>
+    </menuitem>
+
+
+<menuitem id="menu_employee_level" name="Employee Level"
+          parent="hr.menu_config_employee"
+          action="employee_level_action" sequence="40"/>
+
+</odoo>

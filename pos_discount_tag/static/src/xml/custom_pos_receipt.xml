@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates id="template" xml:space="preserve">
+  <t t-name="pos_discount_tag.DiscountPrize" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension" owl="1">
+     <xpath expr="//li[hasclass('price-per-unit')]" position="after">
+            <div style="font-weight: bold; text-align: center;">
+                <li t-if="line.price !== 0 and line.discount_prize and line.discount_prize !== '0'">
+                With <em>$ <t t-esc="line.discount_prize" /> </em> discount
+                </li>
+            </div>
+
+     </xpath>
+
+   </t>
+</templates>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates id="pos_discount_prize_tag_template" xml:space="preserve">
+    <t t-name="pos_discount_tag.pos_discount_prize_tag" t-inherit="point_of_sale.ProductCard" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('product-information-tag')]" position="before">
+            <div t-if="props.discount_prize" class="product_discount_prize_tag">
+                <div class="ribbon pos_discount_prize_tag_ribbon">
+                    <span class="discount_text_pos" id="discount_price_tag_text_id">
+                        $<t t-esc="props.discount_prize"/> off
+                    </span>
+                </div>
+            </div>
+        </xpath>
+    </t>
+</templates>

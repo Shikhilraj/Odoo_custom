@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+        <!-- Multi - Company Rules -->
+    <record model="ir.rule" id="room_not_shared_multi_comp_rule">
+        <field name="name">hostel management multi company</field>
+        <field name="model_id" ref="model_hostel_management_room_management"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record model="ir.rule" id="student_info_not_shared_multi_comp_rule">
+        <field name="name">hostel management multi company</field>
+        <field name="model_id" ref="model_hostel_management_student_information"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+<!--        User Rules-->
+    <record model="ir.module.category" id="hostel_module_management">
+        <field name="name">Hostel Management</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="hostel_student_access" model="res.groups">
+        <field name="name">Student</field>
+        <field name="category_id" ref="hostel_module_management"/>
+    </record>
+     <record id="hostel_staff_access" model="res.groups">
+        <field name="name">Staff</field>
+        <field name="category_id" ref="hostel_module_management"/>
+    </record>
+      <record id="hostel_warden_access" model="res.groups">
+        <field name="name">Warden</field>
+        <field name="implied_ids" eval="[Command.link(ref('hostel_staff_access')), Command.link(ref('hostel_student_access'))]"/>
+        <field name="category_id" ref="hostel_module_management"/>
+    </record>
+
+    <record model="ir.rule" id="cleaning_service_access">
+        <field name="name">Cleaning Staff Rule</field>
+        <field name="model_id" ref="model_cleaning_service"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[Command.link(ref('hostel_staff_access'))]"/>
+        <field name="active" eval="False"/>
+    </record>
+    <record model="ir.rule" id="warden_room_details">
+        <field name="name">Student Room Info</field>
+        <field name="model_id" ref="model_hostel_management_room_management"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[Command.link(ref('hostel_warden_access'))]"/>
+
+    </record>
+    <record model="ir.rule" id="warden_student_manage">
+        <field name="name">Hostel Students Details</field>
+        <field name="model_id" ref="model_hostel_management_student_information"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[Command.link(ref('hostel_warden_access'))]"/>
+    </record>
+    <record model="ir.rule" id="warden_cleaning_staff_manage">
+        <field name="name">Hostel Cleaning Service</field>
+        <field name="model_id" ref="model_cleaning_service"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[Command.link(ref('hostel_warden_access'))]"/>
+    </record>
+    <record model="ir.rule" id="warden_std_leave_manage">
+        <field name="name">Hostel Student Leave Manage</field>
+        <field name="model_id" ref="model_student_leave_request"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[Command.link(ref('hostel_warden_access'))]"/>
+    </record>
+
+    <record model="ir.rule" id="student_info_not_shared_multi_student_rule">
+        <field name="name">hostel management multi student</field>
+        <field name="model_id" ref="model_hostel_management_student_information"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[Command.link(ref('hostel_student_access'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record model="ir.rule" id="student_room_details">
+        <field name="name">hostel management multi student</field>
+        <field name="model_id" ref="model_hostel_management_room_management"/>
+        <field name="domain_force">[('student_ids.user_id', 'in',user.ids)]</field>
+        <field name="groups" eval="[Command.link(ref('hostel_student_access'))]"/>
+    </record>
+    <record model="ir.rule" id="student_leave_details">
+        <field name="name">Room Leave Requests</field>
+        <field name="model_id" ref="model_student_leave_request"/>
+        <field name="domain_force">[('student_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[Command.link(ref('hostel_student_access'))]"/>
+    </record>
+
+
+</odoo>
+
+
+
+

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="salesman_commission_tree" model="ir.ui.view">
+        <field name="name">Salesman Commission tree</field>
+        <field name="model">salesman.commission</field>
+        <field name="arch" type="xml">
+            <tree string="list">
+                <field name="user_id"/>
+                <field name="sales_value" widget="monetary"/>
+                <field name="percent"/>
+                <field name="commission"/>
+                <field name="preparer_id"/>
+                <field name="approver_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="salesman_commission_form" model="ir.ui.view">
+        <field name="name">Salesman Commission Form</field>
+        <field name="model">salesman.commission</field>
+        <field name="arch" type="xml">
+            <form string="Commission Form">
+                <header>
+                    <button name="action_prepare" type="object" class="btn-primary"
+                            groups="salesman_commission.salesman_commission_preparation" string="Preparer"/>
+                    <button name="action_approve" type="object" class="btn-primary"
+                            groups="salesman_commission.salesman_commission_approval" string="Approve"/>
+                    <field name="state" widget="statusbar"
+                            statusbar_visible="new,prepared,approved"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="sales_value" widget="monetary"/>
+                            <field name="percent"/>
+
+                        </group>
+                        <group>
+                            <field name="commission" widget="monetary"/>
+                            <field name="preparer_id"/>
+                            <field name="approver_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Company">
+                            <group>
+                            <field name="company_id"/>
+                            <field name="currency_id"/>
+                        </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="salesman_commission_action" model="ir.actions.act_window">
+        <field name="name">Commission</field>
+        <field name="res_model">salesman.commission</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

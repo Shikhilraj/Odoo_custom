@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<!--        User Rules-->
+    <record model="ir.module.category" id="salesman_commission_module_management">
+        <field name="name">Salesman Commission</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="salesman_commission_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="salesman_commission_module_management"/>
+    </record>
+    <record id="salesman_commission_approval" model="res.groups">
+        <field name="name">Commission Approval</field>
+        <field name="category_id" ref="salesman_commission_module_management"/>
+
+    </record>
+    <record id="salesman_commission_preparation" model="res.groups">
+        <field name="name">Commission Preparation</field>
+        <field name="category_id" ref="salesman_commission_module_management"/>
+    </record>
+</odoo>
+
+
+
+

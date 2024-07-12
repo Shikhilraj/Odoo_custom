@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <record model="ir.actions.server" id="user_create_action">
+            <field name="name">user create action</field>
+            <field name="model_id" ref="model_hostel_management_student_information"/>
+            <field name="state">code</field>
+            <field name="code">model.user_create()
+            </field>
+            <field name="type">ir.actions.server</field>
+        </record>
+        <record id="user_create_rule" model="base.automation">
+                <field name="name">User create: rule on create</field>
+                <field name="model_id" ref="model_hostel_management_student_information"/>
+                <field name="action_server_ids" eval="[(6, 0, [ref('hostel_management.user_create_action')])]"/>
+                <field name="trigger">on_create</field>
+                <field name="active" eval="True"/>
+        </record>
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="cleaning_service_action" model="ir.actions.act_window">
+        <field name="name">Cleaning Service</field>
+        <field name="res_model">cleaning.service</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{"search_default_state_search":1}</field>
+    </record>
+       <record id="cleaning_service_view_tree" model="ir.ui.view">
+        <field name="name">cleaning_service.view.tree</field>
+        <field name="model">cleaning.service</field>
+        <field name="arch" type="xml">
+            <tree string="list">
+                <field name="room_id" widget='selection'/>
+                <field name="start_time"/>
+                <field name="user_id"/>
+                <field name="state"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="cleaning_service_form" model="ir.ui.view">
+        <field name="name">Cleaning Service View Form</field>
+        <field name="model">cleaning.service</field>
+        <field name="arch" type="xml">
+            <form string="cleaning service">
+                 <header>
+                     <button type="object" name="button_assign" string="Assign" class="oe_highlight"/>
+                     <button type="object" name="button_complete" string="Complete" class="oe_highlight"/>
+                    <field name="state" widget="statusbar"
+                            statusbar_visible="new,assigned,done"
+                            options="{'clickable': '1'}"/>
+                 </header>
+                <sheet>
+                    <group>
+                        <field name="room_id"/>
+                        <field name="start_time" required="1"/>
+                    </group>
+                    <group>
+                        <field name="user_id"/>
+                        <field name="company_id"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+            </div>
+            </form>
+        </field>
+    </record>
+    <record id="cleaning_service_search" model="ir.ui.view">
+        <field name="name">Cleaning Service Search</field>
+        <field name="model">cleaning.service</field>
+        <field name="arch" type="xml">
+            <search string="Cleaning service search">
+                <field name="state"/>
+                <filter string="Pending" name="state_search" domain="[('state', '!=', 'done')]"/>
+            </search>
+        </field>
+
+    </record>
+</odoo>

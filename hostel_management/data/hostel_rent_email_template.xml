@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Template to send mail template for the student-->
+        <record id="hostel_rent_email_template" model="mail.template">
+            <field name="name">Hostel Rent Mail</field>
+            <field name="model_id" ref="hostel_management.model_account_move"/>
+            <field name="email_from">{{object.company_id.email}}</field>
+            <field name="email_to">{{object.student_id.email}}</field>
+            <field name="subject">Room Rent Invoice (Ref {{ object.name or 'n/a' }})</field>
+            <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+<div style="justify-content: center;background-color: #714B67; padding:0.6rem;padding-left: 35px;text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;width:40%">
+    <h2>
+         Dear <t t-out="object.student_id.name"/>,
+    </h2>
+    <div>
+        <h3>
+            Your rent : $<t t-out="object.amount_total"/>
+        </h3>
+    </div>
+</div>
+    <a t-attf-href="/web?#id={{ object.id }}&amp;view_type=form&amp;model=account.move" style="text-align: center;color: #ffffff;background-color: #008CBA;">View Invoice</a>
+<br/><br/>
+    Regards,
+<br/>
+<t t-out="object.company_id.name"/>
+<br/>
+</div>
+            </field>
+        </record>
+    </data>
+</odoo>
