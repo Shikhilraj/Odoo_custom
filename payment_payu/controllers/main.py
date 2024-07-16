@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo.http import request
-from odoo import http, fields
+from odoo import http
 from werkzeug.exceptions import Forbidden
 import hmac
 import logging
@@ -11,13 +11,15 @@ _logger = logging.getLogger(__name__)
 
 class PayUController(http.Controller):
     _return_url = '/payment/payu/return'
+    _failure_url = '/payment/payu/failure'
 
     @http.route(_return_url, type='http', auth='public',
                 methods=['GET', 'POST'], csrf=False, save_session=False)
     def payu_return_from_checkout(self, **data):
+        """Process the notification data sent by payu after redirection."""
+
         _logger.info("handling redirection from PayU with data:\n%s",
                      pprint.pformat(data))
-        print('Main controller')
         # Check the integrity of the notification
         tx_sudo = (request.env['payment.transaction'].
                    sudo()._get_tx_from_notification_data('payu', data))
@@ -31,7 +33,6 @@ class PayUController(http.Controller):
     def _verify_notification_signature(notification_data, tx_sudo):
         """ Check that the received signature matches the expected one. """
         # Retrieve the received signature from the data
-        print('controller verify sign')
         received_signature = notification_data.get('hash')
         if not received_signature:
             _logger.warning("received notification with missing signature")
@@ -45,8 +46,3 @@ class PayUController(http.Controller):
             _logger.warning("received notification with invalid signature")
             raise Forbidden()
 
-    @staticmethod
-    def _compute_currency_rate(self):
-        conversion_rate = request.env['res.currency']._get_conversion_rate(
-            self.env.company.currency_id, self.env['res.currency'].search([('name', '=', 'INR')]), request.website.company_id,
-            fields.Date.today())

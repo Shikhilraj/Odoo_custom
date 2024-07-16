@@ -19,17 +19,8 @@ class PaymentProvider(models.Model):
         string="Merchant Salt", required_if_provider='payu',
         groups='base.group_system')
 
-    def _get_supported_currencies(self):
-        """ Override of `payment` to return the supported currencies. """
-        supported_currencies = super()._get_supported_currencies()
-        if self.code == 'payu':
-            supported_currencies = supported_currencies.filtered(
-                lambda c: c.name in const.SUPPORTED_CURRENCIES
-            )
-        return supported_currencies
-
     def _payu_generate_sign(self, values, incoming=True):
-        print('sign generate')
+        """Generate the signature for incoming or outgoing communications."""
         sign_values = {
             **values,
             'key': self.payu_merchant_key,
@@ -50,10 +41,8 @@ class PaymentProvider(models.Model):
     def _get_default_payment_method_codes(self):
         """ Override of `payment` to return the default payment
                 method codes.
-            """
-        print('default payment method')
+        """
         default_codes = super()._get_default_payment_method_codes()
         if self.code != 'payu':
-            print('default_codes : ', default_codes)
             return default_codes
         return const.DEFAULT_PAYMENT_METHOD_CODES

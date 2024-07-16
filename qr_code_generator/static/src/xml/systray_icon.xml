@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="qr_code_generator.systray_icon" owl="1">
+        <t t-set-slot="toggler">
+            <div class="new_icon">
+                <div class="icon_div">
+                    <div class="toggle-icon" role="button">
+                        <i id='create_order' t-on-click="_onClick"
+                          class="fa fa-qrcode" aria-hidden="true"
+                          style="color: white; margin-bottom:10px; padding:13px;"
+                          role="img"/>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="qr_code_generator.QRPopup">
+        <div class="popup popup-confirm">
+            <div class="modal-header">
+                <h4 class="modal-title title drag-handle">
+                    <t t-esc="Hi" />
+                </h4>
+            </div>
+        </div>
+    </t>
+
+</templates>

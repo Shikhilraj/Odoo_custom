@@ -13,7 +13,6 @@
         'data/payment_method_payu.xml',
         'views/payment_payu_template.xml',
         'views/payment_provider_view.xml',
-
         'data/payment_provider_data.xml',
 
     ],
