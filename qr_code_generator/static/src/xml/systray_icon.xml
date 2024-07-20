@@ -1,28 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
-    <t t-name="qr_code_generator.systray_icon" owl="1">
+    <t t-name="systray_icon" owl="1">
+        <Dropdown position="'top-end'" togglerClass="'btn d-flex align-items-center'">
         <t t-set-slot="toggler">
             <div class="new_icon">
                 <div class="icon_div">
                     <div class="toggle-icon" role="button">
-                        <i id='create_order' t-on-click="_onClick"
-                          class="fa fa-qrcode" aria-hidden="true"
-                          style="color: white; margin-bottom:10px; padding:13px;"
-                          role="img"/>
+                        <i id='create_qr_code'
+                          class="fa fa-qrcode" t-on-click="_qrReset"
+                          style="color: white; align-items:center; padding:13px;"
+                          role="img" area-label="QR"/>
                     </div>
                 </div>
             </div>
         </t>
-    </t>
-
-    <t t-name="qr_code_generator.QRPopup">
-        <div class="popup popup-confirm">
-            <div class="modal-header">
-                <h4 class="modal-title title drag-handle">
-                    <t t-esc="Hi" />
-                </h4>
-            </div>
-        </div>
+            <t>
+                <div class="qrCodeGeneratingClass" style="height:40%;">
+                    <input type="text" name="qr_text" placeholder="Enter anything"
+                        t-ref="qr_input" style="width: 90%; margin: auto;"/>
+                    <div class="mt24" style="display: flex; align-content: center;
+                    justify-content: center;">
+                        <span id="generate_button " class="btn-primary curser-pointer"
+                              t-on-click="_qrGenerate"
+                              style="border-radius: 4px; width: 75px;
+                                     height: 22px;font-weight: 500; text-align: center;
+                                     line-height:1.5 margin-left: 20px;
+                                     cursor: pointer; ont-size: 15px;">
+                                Generate
+                        </span>
+                        <span class="QrReset btn-danger curser-pointer"
+                              id="reset_button" t-on-click="_qrReset"
+                              style="border-radius: 4px; width: 75px;height: 22px;
+                              font-weight: 500; margin-left: 27px; cursor:
+                              pointer;ont-size: 15px; text-align: center;">
+                            Reset
+                        </span>
+                    </div>
+                    <div class="mt24">
+                        <div id="qr_code_image" t-if="state.qrData['qr']">
+                             <img t-ref="qr_image"
+                                    t-attf-src="data:image/png;base64,{{state.qrData['qr']}}"
+                                    alt="QR CODE"
+                                    style="padding-left: 35px;"/>
+                            <a t-attf-download="QR Code"
+                               t-attf-href="data:image/png;base64,{{state.qrData['qr']}}">
+                                <i class="fa fa-download" title="Download">
+                                </i>
+                             </a>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </Dropdown>
     </t>
 
 </templates>

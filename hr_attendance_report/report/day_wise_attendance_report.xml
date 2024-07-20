@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <template id="report_day_wise_attendance">
+       <t t-call="web.html_container">
+           <t t-call="web.external_layout">
+               <div class="page">
+                   <div class="oe_structure"/>
+                   <h2>Day Wise Attendance Report</h2>
+                   <br></br>
+                   <p>
+                     Date : data['date']
+                   </p>
+                   <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>SL.No</th>
+                                    <th>Employee</th>
+                                    <th>Check In</th>
+                                    <th>Check Out</th>
+                                    <th>In Mode</th>
+                                    <th>Job Title</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="i" t-value="1" />
+                                <t t-foreach="result" t-as="res">
+                                    <tr>
+                                        <td>
+                                            <t t-out="i"/>
+                                        </td>
+                                        <td>
+                                            <t t-out="res[0]"/>
+                                        </td>
+                                        <td>
+                                            <t t-out="res[1]"/>
+                                        </td>
+                                        <td>
+                                            <t t-out="res[2]"/>
+                                        </td>
+                                        <td>
+                                            <t t-out="res[3]"/>
+                                        </td>
+                                        <td>
+                                            <t t-out="res[4]"/>
+                                        </td>
+                                        <t t-set="i" t-value="i+1"/>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+               </div>
+           </t>
+       </t>
+   </template>
+</odoo>

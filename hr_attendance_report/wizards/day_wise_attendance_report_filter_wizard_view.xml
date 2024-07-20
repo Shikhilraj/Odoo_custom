@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<record id="day_wise_attendance_report_filter_wizard_form" model="ir.ui.view">
+       <field name="name">Day Wise Attendance Report Filter Wizard Form</field>
+       <field name="model">day.wise.attendance.report.filter.wizard</field>
+       <field name="arch" type="xml">
+           <form string="Day Wise Attendance Report Wizard Form">
+                   <group>
+                       <group>
+                           <field name="date"/>
+                       </group>
+                   </group>
+               <footer>
+                   <button
+                       name="action_day_wise_report" string="Print PDF Report"
+                       type="object" class="btn-primary"/>
+                   <button
+                       name="cancel" string="cancel" type="object"
+                       class="btn-primary" special="cancel"/>
+               </footer>
+           </form>
+       </field>
+   </record>
+
+    <record id="day_wise_attendance_report_wizard_action" model="ir.actions.act_window">
+       <field name="name">Day Wise Attendance Report Wizard</field>
+       <field name="res_model">day.wise.attendance.report.filter.wizard</field>
+       <field name="view_mode">form</field>
+       <field name="view_id" ref="day_wise_attendance_report_filter_wizard_form" />
+       <field name="target">new</field>
+    </record>
+<menuitem id="attendance_report" name="Report"
+          parent="hr_attendance.menu_hr_attendance_root"
+          sequence="15">
+    <menuitem
+            id="hr_attendance_day_wise_reporting"
+            name="Day wise Report" sequence="5"
+            groups="hr_attendance.group_hr_attendance_officer"
+            action="day_wise_attendance_report_wizard_action"/>
+</menuitem>
+
+
+</odoo>
+

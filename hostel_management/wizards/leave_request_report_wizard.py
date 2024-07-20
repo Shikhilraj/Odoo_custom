@@ -18,8 +18,6 @@ class LeaveRequestReportWizard(models.TransientModel):
         'hostel.management.student.information', string='Student')
     start_date = fields.Date(string='Start Date')
     arrival_date = fields.Date(string='Arrival Date')
-    # company_id = fields.Many2one('res.company',
-    #                              default=lambda self: self.env.company)
 
     def action_leave_request_report(self):
         data = {
