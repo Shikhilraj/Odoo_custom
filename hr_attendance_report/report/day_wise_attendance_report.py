@@ -12,13 +12,11 @@ class DayWiseAttendanceReport(models.AbstractModel):
         """Get Report Values"""
         print("2")
         print(data)
-        if data['date']:
-            dat = data['date']
-        else:
-            dat = fields.Date.today()
+        data['date']: fields.Date.today()
         query = f""" select emp.name,att.check_in,att.check_out, att.in_mode, 
         emp.job_title from hr_attendance as att inner join hr_employee as emp
-        on att.employee_id = emp.id where att.check_in ='{dat}'
+        on att.employee_id = emp.id where att.check_in >='{fields.Date.today()} 
+        00:00:00' and att.check_in <= '{fields.Date.today()} 23:59:59'
         """
         self.env.cr.execute(query)
         result = self.env.cr.fetchall()
