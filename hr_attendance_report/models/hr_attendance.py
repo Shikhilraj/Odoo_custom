@@ -1,29 +1,20 @@
 # -*- coding: utf-8 -*-
-from odoo import api, fields, models
+import datetime
+
+from odoo import fields, models
 import base64
 
 
 class HrAttendance(models.Model):
+    """"""
     _inherit = 'hr.attendance'
+    _description = 'Hr Attendance'
 
     company_id = fields.Many2one('res.company',
                                  default=lambda self: self.env.company)
-    manager_email = fields.Char(default=lambda self: self.env.user.email)
 
     def action_day_wise_report_send(self):
-        print('Mail sending')
-        desired_group_name = self.env['res.groups'].search_read(
-            [('name', '=', 'Administrator')])
-        admin = self.env['res.users'].has_group('hr_attendance.group_hr_attendance_manager')
-        print('Admin :', admin)
-
-
-        # mail_template = (
-        #     self.env.ref
-        #     ('hr_attendance_report.day_wise_attendance_report_template'))
-        # mail_template.send_mail(self.id, force_send=True)
-
-        print("mail success : ", self.manager_email)
+        """Action for report attaching in to sending mail"""
         attendance_report = (
             self.env.ref('hr_attendance_report.action_report_hr_attendance'))
         data_record = base64.b64encode(
@@ -35,7 +26,7 @@ class HrAttendance(models.Model):
             'datas': data_record,
             'store_fname': data_record,
             'mimetype': 'application/pdf',
-            'res_model': 'account.move',
+            'res_model': 'hr.attendance',
         }
         attendance_report_attachment_id = self.env[
             'ir.attachment'].sudo().create(
@@ -43,5 +34,23 @@ class HrAttendance(models.Model):
         if attendance_report_attachment_id:
             email_template = self.env.ref(
                 'hr_attendance_report.day_wise_attendance_report_template')
-        email = self.env['res.users'].search_read(['has_group', '=', 'group_hr_attendance_manager'])
-        print("email : ", email)
+            if email_template:
+                email_values = {
+                    'email_to': self.get_email_list(),
+                    'email_cc': False,
+                    'scheduled_date': False,
+                    'recipient_ids': [],
+                    'auto_delete': True,
+                }
+                email_template.attachment_ids = [
+                    (fields.Command.link(attendance_report_attachment_id.id))]
+                (email_template.with_context(date=datetime.date.today()).
+                 send_mail(self.id, email_values=email_values, force_send=True))
+                email_template.attachment_ids = [(fields.Command.clear())]
+
+    def get_email_list(self):
+        """Adding email partner email to email templates"""
+        user = self.env.ref('hr_attendance.group_hr_attendance_manager').users
+        email_list = [usr.partner_id.email for usr in user
+                      if usr.partner_id.email]
+        return ",".join(email_list)

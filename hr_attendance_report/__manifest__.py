@@ -10,11 +10,8 @@
         Day Wise Attendance Report""",
     'installable': True,
     'data': [
-        'security/ir.model.access.csv',
-        'wizards/day_wise_attendance_report_filter_wizard_view.xml',
         'report/day_wise_attendance_actions.report.xml',
         'report/day_wise_attendance_report.xml',
-        'data/ir_mail_server.xml',
         'data/day_wise_attendance_report_mail.xml',
         'data/day_wise_attendance_report_recurring.xml'
 

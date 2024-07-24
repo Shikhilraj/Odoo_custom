@@ -1,2 +1,0 @@
-id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-access_day_wise_attendance_report_wizard,access.day.wise.attendance.report.wizard,model_day_wise_attendance_report_filter_wizard,base.group_user,1,1,1,1

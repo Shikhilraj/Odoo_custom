@@ -8,13 +8,14 @@
                    <h2>Day Wise Attendance Report</h2>
                    <br></br>
                    <p>
-                     Date : data['date']
+                     Date : <t t-esc="time.strftime('%y-%m-%d')"/>
                    </p>
                    <table class="table">
                             <thead>
                                 <tr>
                                     <th>SL.No</th>
                                     <th>Employee</th>
+                                    <th>Email</th>
                                     <th>Check In</th>
                                     <th>Check Out</th>
                                     <th>In Mode</th>
@@ -42,6 +43,9 @@
                                         </td>
                                         <td>
                                             <t t-out="res[4]"/>
+                                        </td>
+                                        <td>
+                                            <t t-out="res[5]"/>
                                         </td>
                                         <t t-set="i" t-value="i+1"/>
                                     </tr>
